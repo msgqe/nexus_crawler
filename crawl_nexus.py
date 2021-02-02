@@ -14,7 +14,7 @@ def http_get(url):
 
 
 def file_get_contents(filename):
-    with open(filename) as f:
+    with open(filename, 'rb') as f:
         return f.read().strip()
 
 
@@ -97,6 +97,6 @@ for dirpath, dirnames, filenames in os.walk(MAVEN_REPO):
 
 if opts.json:
     results = {"missing_dirs": dir_errors, "missing_files": file_errors}
-    tf = tempfile.NamedTemporaryFile(prefix='nexus_crawl_', mode='w+t', delete=False)
+    tf = tempfile.NamedTemporaryFile(prefix='nexus_crawl_', mode='w', encoding='utf-8', delete=False)
     json.dump(results, tf, indent=2)
     print("JSON results saved in %s" % tf.name)
